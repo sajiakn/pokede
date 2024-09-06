@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Link from "next/link";
 
 // ポケモンのタイプに応じた色を定義
 const typeColors = {
@@ -135,32 +136,34 @@ export function PokeDex() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredPokemon.map((pokemon) => (
-            <Card key={pokemon.id} className="overflow-hidden">
-              <CardContent className="p-4">
-                <div className="aspect-square relative mb-2">
-                  <img
-                    src={pokemon.image}
-                    alt={pokemon.name}
-                    className="object-contain w-full h-full"
-                  />
-                </div>
-                <h2 className="text-xl font-semibold mb-2 dark:text-white">
-                  {pokemon.name}
-                </h2>
-                <div className="flex gap-2">
-                  {pokemon.types.map((type) => (
-                    <Badge
-                      key={type}
-                      className={`${
-                        typeColors[type as keyof typeof typeColors]
-                      } text-white`}
-                    >
-                      {type}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <Link href={`/pokemon/${pokemon.id}`} key={pokemon.id}>
+              <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <CardContent className="p-4">
+                  <div className="aspect-square relative mb-2">
+                    <img
+                      src={pokemon.image}
+                      alt={pokemon.name}
+                      className="object-contain w-full h-full"
+                    />
+                  </div>
+                  <h2 className="text-xl font-semibold mb-2 dark:text-white">
+                    {pokemon.name}
+                  </h2>
+                  <div className="flex gap-2">
+                    {pokemon.types.map((type) => (
+                      <Badge
+                        key={type}
+                        className={`${
+                          typeColors[type as keyof typeof typeColors]
+                        } text-white`}
+                      >
+                        {type}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>
