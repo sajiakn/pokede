@@ -103,7 +103,7 @@ export function PokeDex() {
             variant="outline"
             size="icon"
             onClick={() => setDarkMode(!darkMode)}
-            aria-label="Toggle dark mode"
+            aria-label="ダークモード切り替え"
           >
             {darkMode ? (
               <Sun className="h-6 w-6" />
