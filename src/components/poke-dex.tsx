@@ -80,15 +80,15 @@ export function PokeDex() {
     fetchPokemon();
   }, []);
 
-  const filteredPokemon = pokemonData.filter(
-    (pokemon) =>
-      pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (selectedType === "" || pokemon.types.includes(selectedType))
-  );
-
   const allTypes = Array.from(
     new Set(pokemonData.flatMap((pokemon) => pokemon.types))
   );
+
+  const filteredPokemon = pokemonData.filter((pokemon) => {
+    const matchesSearch = pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesType = selectedType === "" || selectedType === "all" || pokemon.types.includes(selectedType);
+    return matchesSearch && matchesType;
+  });
 
   return (
     <div
